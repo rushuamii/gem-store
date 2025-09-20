@@ -1,8 +1,8 @@
 [build]
   command = "npm install && npm run build"
   publish = ".next"
-  environment = { NEXT_DISABLE_TURBOPACK = "1" }
 
 [build.environment]
+  NEXT_DISABLE_TURBOPACK = "1"
   NEXT_PUBLIC_SANITY_PROJECT_ID = "4o80zeix"
   NEXT_PUBLIC_SANITY_DATASET = "production"
