@@ -3,33 +3,34 @@ import { simplifiedProduct } from "../interface";
 import { client } from "../lib/sanity";
 import Image from "next/image";
 
-async function getData(cateogry: string) {
-  const query = `*[_type == "product" && category->name == "${cateogry}"] {
-        _id,
-          "imageUrl": images[0].asset->url,
-          price,
-          name,
-          "slug": slug.current,
-          "categoryName": category->name
-      }`;
+// Explicit props type
+type CategoryPageProps = {
+  params: {
+    category: string;
+  };
+};
 
-  const data = await client.fetch(query);
+async function getData(category: string) {
+  const query = `*[_type == "product" && category->name == "${category}"] {
+    _id,
+    "imageUrl": images[0].asset->url,
+    price,
+    name,
+    "slug": slug.current,
+    "categoryName": category->name
+  }`;
 
-  return data;
+  return await client.fetch(query);
 }
 
 export const dynamic = "force-dynamic";
 
-export default async function CategoryPage({
-  params,
-}: {
-  params: { category: string };
-}) {
+export default async function CategoryPage({ params }: CategoryPageProps) {
   const data: simplifiedProduct[] = await getData(params.category);
 
   return (
     <div className="bg-white">
-      <div className="mx-auto max-w-2xl px-4 sm:px-6  lg:max-w-7xl lg:px-8">
+      <div className="mx-auto max-w-2xl px-4 sm:px-6 lg:max-w-7xl lg:px-8">
         <div className="flex justify-between items-center">
           <h2 className="text-2xl font-bold tracking-tight text-gray-900">
             Our Products for {params.category}
@@ -42,7 +43,7 @@ export default async function CategoryPage({
               <div className="aspect-square w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:h-80">
                 <Image
                   src={product.imageUrl}
-                  alt="Product image"
+                  alt={product.name}
                   className="w-full h-full object-cover object-center lg:h-full lg:w-full"
                   width={300}
                   height={300}
