@@ -211,7 +211,7 @@ export default async function ProductPage({
                         {product.categoryName}
                       </p>
                       <p className="font-bold text-gray-900">
-                        Rs {product.price.toLocaleString()}
+                        $ {product.price.toLocaleString()}
                       </p>
                     </div>
                   </Link>
