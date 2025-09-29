@@ -1,3 +1,4 @@
+import Footer from "@/app/components/footer";
 import ImageGallery from "@/app/components/ImageGallery";
 import { fullProduct } from "@/app/interface";
 import { client } from "@/app/lib/sanity";
@@ -221,6 +222,9 @@ export default async function ProductPage({
           </div>
         )}
       </div>
+      <br />
+      <br />
+      <Footer />
     </div>
   );
 }

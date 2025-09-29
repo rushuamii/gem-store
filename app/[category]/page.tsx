@@ -2,6 +2,7 @@ import Link from "next/link";
 import { simplifiedProduct } from "../interface";
 import { client } from "../lib/sanity";
 import Image from "next/image";
+import Footer from "../components/footer";
 
 // Explicit props type
 type CategoryPageProps = {
@@ -69,6 +70,9 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
           ))}
         </div>
       </div>
+      <br />
+      <br />
+      <Footer />
     </div>
   );
 }
